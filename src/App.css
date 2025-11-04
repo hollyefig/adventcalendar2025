@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box!important;
+}
+
+.default-font {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.App {
+  --white: #F3EFE9;
+  --yellow: #DEAC23;
+  --green: #51733C;
+  --pink: #DA3D5B;
+  --red: #BF2E39;
+  --darkGreen: #172601;
+  background-color: var(--white);
+}
+
+
+/* & MOBILE */
+@media screen and (max-width: 500px) {}
