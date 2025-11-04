@@ -19,8 +19,22 @@
   --green: #51733C;
   --pink: #DA3D5B;
   --red: #BF2E39;
-  --darkGreen: #172601;
+  --dark-green: #172601;
   background-color: var(--white);
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.black-backdrop {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  opacity: 0;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 

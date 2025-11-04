@@ -1,0 +1,92 @@
+import React, { useState, useRef, useEffect } from "react";
+import "./nav.css";
+
+export default function Nav({ toggleNav, isOpen }) {
+  const [dates, getDates] = useState(false);
+
+  const navHiddenRef = useRef(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [navHiddenHeight, setNavHiddenHeight] = useState(0);
+
+  const switchClick = () => {
+    dates === false ? getDates(true) : getDates(false);
+  };
+
+  //   ! USE EFFECT
+  useEffect(() => {
+    const updateHeight = () => {
+      if (navHiddenRef.current) {
+        setNavHiddenHeight(navHiddenRef.current.offsetHeight);
+      }
+    };
+    updateHeight(); // Run once on load
+    window.addEventListener("resize", updateHeight); // Recalculate if viewport changes
+
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
+  // Mark component as "loaded" after first mount
+  useEffect(() => {
+    const t = setTimeout(() => setHasLoaded(true), 50);
+    return () => clearTimeout(t);
+  }, []);
+
+  return (
+    <div
+      className='nav-wrapper'
+      style={{
+        bottom: isOpen ? 0 : `-${navHiddenHeight}px`,
+        transition: hasLoaded ? "bottom 0.3s ease" : "none",
+        position: "fixed",
+        left: 0,
+        right: 0,
+      }}
+    >
+      <div className='nav-content'>
+        {/* Bars */}
+        <div className='nav-bars' onClick={toggleNav}>
+          {[...Array(3)].map((_, i) => (
+            <svg
+              key={i}
+              width='60'
+              height='3'
+              viewBox='0 0 60 3'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <line
+                x1='1.38889'
+                y1='1.38889'
+                x2='58.6111'
+                y2='1.38889'
+                stroke='#BF2E39'
+                strokeWidth='2.77778'
+                strokeLinecap='round'
+              />
+            </svg>
+          ))}
+        </div>
+        {/* Nav button */}
+        <div className='past-date-wrapper' ref={navHiddenRef}>
+          <div className='past-date-left'>Show past dates</div>
+          <div className='past-date-right' onClick={() => switchClick()}>
+            <div
+              className={
+                dates === false
+                  ? `date-switch-bg-off date-switch-bg`
+                  : `date-switch-bg-on date-switch-bg`
+              }
+            ></div>
+            <div
+              className={
+                dates === false
+                  ? `date-switch-button-off date-switch-button`
+                  : `date-switch-button-on date-switch-button`
+              }
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
