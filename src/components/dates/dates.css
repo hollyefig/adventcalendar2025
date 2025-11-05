@@ -2,7 +2,64 @@
     width: 100vw;
     min-height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 3em 0 4em 0;
+}
+
+.dates-wrapper > div {
+    width: 100%;
+}
+
+.dates-top {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dates-bottom {
+    padding: 2.5em .5em .5em .5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.dates-grid-wrapper {
+    --width: 800px;
+    position: relative;
+    max-width: var(--width);
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.final-art-wrapper, .dates-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.dates-grid {
+    width: 100%; 
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.dates-grid > div {
+    position: relative;
+}
+
+.calendar-day {
+    background-color: var(--white);
+    border: 1px dashed var(--yellow);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    transform-origin: left 50%;
 }

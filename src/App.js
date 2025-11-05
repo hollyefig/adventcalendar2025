@@ -22,7 +22,7 @@ function App() {
       } else {
         tl.to(".black-backdrop", { opacity: 0, duration: 0.2 }, "<.1").to(
           ".black-backdrop",
-          { display: "block" }
+          { display: "none" }
         );
       }
     };
