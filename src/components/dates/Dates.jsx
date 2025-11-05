@@ -5,7 +5,7 @@ import aclogo from "../../IMGs/title-img.png";
 import finalArt from "../../IMGs/final-art.png";
 import { dateData } from "./dateData";
 
-export default function Dates() {
+export default function Dates({ navHeight, setBlackBackdrop, showPastDates }) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   //   ? USE EFFECT
@@ -25,8 +25,9 @@ export default function Dates() {
   //   ? Click a day
   const clickDay = (e, index) => {
     console.log("click", e, index);
+    // setBlackBackdrop(true);
+
     gsap.to(`#cal-num-${index}`, {
-      //   transformPerspective: 200,
       rotateY: 90,
       duration: 0.5,
     });
@@ -34,7 +35,10 @@ export default function Dates() {
 
   //   BODY
   return (
-    <div className='dates-wrapper'>
+    <div
+      className='dates-wrapper'
+      style={{ padding: `2em 0 ${navHeight}px 0` }}
+    >
       <div className='dates-top'>
         <img
           src={aclogo}
@@ -43,6 +47,7 @@ export default function Dates() {
           alt='ac-logo'
         />
       </div>
+      {/* bottom */}
       <div className='dates-bottom'>
         <div className='dates-grid-wrapper'>
           <div className='final-art-wrapper'>
@@ -53,23 +58,39 @@ export default function Dates() {
               alt='final-art'
             />
           </div>
+          {/* Dates grid */}
           <div className='dates-grid'>
             {dateData.map((e, index) => {
               index = index + 1;
+              console.log(!showPastDates);
               return (
                 <div
                   id={`cal-${index}`}
                   key={`cal-${index}`}
                   onClick={() => clickDay(e, index)}
                 >
-                  <div className='calendar-day' id={`cal-num-${index}`}>
-                    <img
-                      src={e.calImg}
-                      alt={`cal-alt-${index}`}
-                      width='100%'
-                      style={{ width: "100%" }}
-                    />
-                  </div>
+                  {/* Apply expiration conditional & Past Date function */}
+                  {showPastDates ? (
+                    <div className='calendar-day' id={`cal-num-${index}`}>
+                      <img
+                        src={e.calImg}
+                        alt={`cal-alt-${index}`}
+                        width='100%'
+                        style={{ width: "100%" }}
+                      />
+                    </div>
+                  ) : (
+                    currentDate < e.expire && (
+                      <div className='calendar-day' id={`cal-num-${index}`}>
+                        <img
+                          src={e.calImg}
+                          alt={`cal-alt-${index}`}
+                          width='100%'
+                          style={{ width: "100%" }}
+                        />
+                      </div>
+                    )
+                  )}
                 </div>
               );
             })}

@@ -1,15 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./nav.css";
 
-export default function Nav({ toggleNav, isOpen }) {
-  const [dates, getDates] = useState(false);
-
+export default function Nav({
+  toggleNav,
+  isOpen,
+  setNavHeight,
+  showPastDates,
+  setShowPastDates,
+}) {
   const navHiddenRef = useRef(null);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [navHiddenHeight, setNavHiddenHeight] = useState(0);
+  const navRef = useRef(null);
 
   const switchClick = () => {
-    dates === false ? getDates(true) : getDates(false);
+    setShowPastDates((prev) => !prev);
   };
 
   //   ! USE EFFECT
@@ -21,6 +26,10 @@ export default function Nav({ toggleNav, isOpen }) {
     };
     updateHeight(); // Run once on load
     window.addEventListener("resize", updateHeight); // Recalculate if viewport changes
+
+    if (navRef.current) {
+      setNavHeight(navRef.current.offsetHeight);
+    }
 
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
@@ -44,7 +53,7 @@ export default function Nav({ toggleNav, isOpen }) {
     >
       <div className='nav-content'>
         {/* Bars */}
-        <div className='nav-bars' onClick={toggleNav}>
+        <div className='nav-bars' ref={navRef} onClick={toggleNav}>
           {[...Array(3)].map((_, i) => (
             <svg
               key={i}
@@ -72,14 +81,14 @@ export default function Nav({ toggleNav, isOpen }) {
           <div className='past-date-right' onClick={() => switchClick()}>
             <div
               className={
-                dates === false
+                showPastDates === false
                   ? `date-switch-bg-off date-switch-bg`
                   : `date-switch-bg-on date-switch-bg`
               }
             ></div>
             <div
               className={
-                dates === false
+                showPastDates === false
                   ? `date-switch-button-off date-switch-button`
                   : `date-switch-button-on date-switch-button`
               }

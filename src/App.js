@@ -7,6 +7,8 @@ import Nav from "./components/nav/Nav";
 function App() {
   const [blackBackdrop, setBlackBackdrop] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [navHeight, setNavHeight] = useState();
+  const [showPastDates, setShowPastDates] = useState(false);
 
   // ! USE EFFECT
   useEffect(() => {
@@ -39,12 +41,22 @@ function App() {
 
   return (
     <div className='App default-font'>
-      <Dates></Dates>
+      <Dates
+        navHeight={navHeight}
+        setBlackBackdrop={setBlackBackdrop}
+        showPastDates={showPastDates}
+      ></Dates>
       <div
         className='black-backdrop'
         onClick={() => isOpen && toggleNav()}
       ></div>
-      <Nav toggleNav={toggleNav} isOpen={isOpen}></Nav>
+      <Nav
+        toggleNav={toggleNav}
+        isOpen={isOpen}
+        setNavHeight={setNavHeight}
+        showPastDates={showPastDates}
+        setShowPastDates={setShowPastDates}
+      ></Nav>
     </div>
   );
 }
