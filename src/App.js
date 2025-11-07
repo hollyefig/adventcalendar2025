@@ -62,7 +62,7 @@ function App() {
         className='black-backdrop'
         onClick={() => isOpen && toggleNav()}
       ></div>
-      <Popup popupOpen={popupOpen}></Popup>
+      <Popup></Popup>
       <Nav
         toggleNav={toggleNav}
         isOpen={isOpen}

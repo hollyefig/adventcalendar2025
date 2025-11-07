@@ -1,5 +1,10 @@
 .popup-wrapper {
+    --size: 320px;
+    --halfSize: calc(var(--size) / 2);
     position: fixed;
-    top: 50dvh;
-    left: 50vw;
+    top: calc(50dvh - var(--halfSize));
+    left: calc(50% - var(--halfSize));
+    background-color: var(--white);
+    max-width:var(--size);
+    width: 100%;
 }
