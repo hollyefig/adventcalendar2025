@@ -3,16 +3,28 @@ import { gsap } from "gsap";
 import "./dates.css";
 import aclogo from "../../IMGs/title-img.png";
 import finalArt from "../../IMGs/final-art.png";
-import { dateData } from "./dateData";
 
-export default function Dates({ navHeight, setBlackBackdrop, showPastDates }) {
+export default function Dates({
+  navHeight,
+  setBlackBackdrop,
+  showPastDates,
+  dateData,
+  setDateData,
+  popupOpen,
+}) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   //   ? USE EFFECT
   useEffect(() => {
+    // Update date every minute
     const dateCheck = () => {
-      setCurrentDate(new Date());
+      const now = new Date();
+      setCurrentDate(now);
     };
+
+    setDateData((prev) =>
+      prev.map((obj) => ({ ...obj, open: new Date() > obj.expire }))
+    );
 
     // check every minute
     const interval = setInterval(dateCheck, 1000 * 60);
@@ -20,17 +32,32 @@ export default function Dates({ navHeight, setBlackBackdrop, showPastDates }) {
     return () => {
       clearInterval(interval);
     };
-  }, [setCurrentDate]);
+  }, [setCurrentDate, currentDate, setDateData]);
 
   //   ? Click a day
   const clickDay = (e, index) => {
-    console.log("click", e, index);
     // setBlackBackdrop(true);
 
-    gsap.to(`#cal-num-${index}`, {
-      rotateY: 90,
-      duration: 0.5,
-    });
+    // If day can be opened
+    if (
+      currentDate > dateData[index === 0 ? index : index - 1].expire &&
+      e.open === false
+    ) {
+      // set day to opened
+      setDateData((prev) =>
+        prev.map((day, i) => (i === index ? { ...day, open: !day.open } : day))
+      );
+
+      gsap.to(`#cal-num-${index}`, {
+        rotateY: 90,
+        duration: 0.5,
+      });
+
+      popupOpen(e, index);
+    } else if (currentDate < e.expire && e.open === false) {
+      // Day cannot open yet
+      console.log("cannot open yet");
+    }
   };
 
   //   BODY
@@ -61,8 +88,6 @@ export default function Dates({ navHeight, setBlackBackdrop, showPastDates }) {
           {/* Dates grid */}
           <div className='dates-grid'>
             {dateData.map((e, index) => {
-              index = index + 1;
-              console.log(!showPastDates);
               return (
                 <div
                   id={`cal-${index}`}

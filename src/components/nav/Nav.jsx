@@ -7,14 +7,18 @@ export default function Nav({
   setNavHeight,
   showPastDates,
   setShowPastDates,
+  dateData,
+  setDateData,
 }) {
   const navHiddenRef = useRef(null);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [navHiddenHeight, setNavHiddenHeight] = useState(0);
   const navRef = useRef(null);
 
+  // & Switch to show past dates
   const switchClick = () => {
     setShowPastDates((prev) => !prev);
+    setDateData((prev) => prev.map((obj) => ({ ...obj, open: false })));
   };
 
   //   ! USE EFFECT
@@ -24,6 +28,7 @@ export default function Nav({
         setNavHiddenHeight(navHiddenRef.current.offsetHeight);
       }
     };
+
     updateHeight(); // Run once on load
     window.addEventListener("resize", updateHeight); // Recalculate if viewport changes
 
@@ -32,7 +37,7 @@ export default function Nav({
     }
 
     return () => window.removeEventListener("resize", updateHeight);
-  }, []);
+  }, [setNavHeight]);
 
   // Mark component as "loaded" after first mount
   useEffect(() => {

@@ -1,0 +1,5 @@
+.popup-wrapper {
+    position: fixed;
+    top: 50dvh;
+    left: 50vw;
+}
