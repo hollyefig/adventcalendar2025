@@ -18,17 +18,32 @@ function App() {
 
   // ! USE EFFECT
   useEffect(() => {
+    // determine if date opened is in future or not for backdrop animation delay
+    const notFutureDate =
+      new Date() >
+      dateData[selectedDate.index !== 0 ? selectedDate.index - 1 : 0].expire;
+
+    // backdrop boolean
     const backdropOn = navIsOpen || selectedDate.isPopupOpen;
 
     const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } });
 
     // Backdrop animation
     if (backdropOn) {
-      tl.to(".black-backdrop", { display: "block" }).to(
-        ".black-backdrop",
-        { opacity: 0.6, duration: 0.2 },
-        "<"
-      );
+      // if non-future date is opened, add delay
+      if (!navIsOpen && notFutureDate) {
+        tl.to(".black-backdrop", { display: "block" }).to(
+          ".black-backdrop",
+          { opacity: 0.6, duration: 0.2, delay: 0.5 },
+          "<"
+        );
+      } else {
+        tl.to(".black-backdrop", { display: "block" }).to(
+          ".black-backdrop",
+          { opacity: 0.6, duration: 0.2 },
+          "<"
+        );
+      }
     } else {
       tl.to(".black-backdrop", { opacity: 0, duration: 0.2 }).to(
         ".black-backdrop",
