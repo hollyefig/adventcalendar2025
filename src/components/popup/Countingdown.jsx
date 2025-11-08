@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
 export default function Countingdown({ selectedDate, dateData }) {
+  const wrapper = useRef(null);
+
+  // get target date
   const targetDate =
     dateData[selectedDate.index !== 0 ? selectedDate.index - 1 : 0].expire;
   const [timeLeft, setTimeLeft] = useState({});
@@ -38,8 +42,19 @@ export default function Countingdown({ selectedDate, dateData }) {
 
     return () => clearInterval(interval); // Cleanup
   }, [targetDate]);
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        wrapper.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+      );
+    },
+    { scope: wrapper }
+  );
   return (
-    <div className='countdown-popup-text'>
+    <div className='countdown-popup-text' ref={wrapper}>
       <div className='countdown-content-wrapper'>
         <div className='cd-content-1'>This memory can be unlocked in</div>
         {/* countdown timer */}

@@ -1,4 +1,5 @@
 import Countingdown from "./Countingdown";
+import Memorypopup from "./Memorypopup";
 import "./popup.css";
 
 export default function Popup({ selectedDate, setSelectedDate, dateData }) {
@@ -13,9 +14,7 @@ export default function Popup({ selectedDate, setSelectedDate, dateData }) {
         {/* Check if date can open or be on countdown to open */}
         {dateData[selectedDate.index].open ? (
           // Open and showcase memory
-          <div className='display-popup-text'>
-            This date is open, {dateData[selectedDate.index].text}
-          </div>
+          <Memorypopup selectedDate={selectedDate} dateData={dateData} />
         ) : (
           // provide a countdown
           <Countingdown selectedDate={selectedDate} dateData={dateData} />
