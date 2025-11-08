@@ -1,76 +1,90 @@
 .popup-outer-wrapper {
     width: 100dvw;
-    height: 100dvh;
+    height: 85dvh;
     position: absolute;
     top:0;
     left:0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    
-}
-
-.popup-wrapper {
-    --size: 420px;
-    --halfSize: calc(var(--size) / 2);
-    position: fixed;
-    max-width:var(--size);
-    width: 96%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
-
-.popup-text {
-    width: 100%;
-    overflow-wrap: break-word;
-    word-break: break-word;    
-    white-space: normal;
+    align-items: center;   
 }
 
 /* * Shared CSS between memory and countdown popups */
 
-.display-popup-content, .countdown-popup-text {
-    width: 100%;
+.memory-popup-wrapper {
+    --size: 320px;
+}
+.countdown-popup-wrapper {
+    --size: 420px;
+}
+
+.memory-popup-wrapper, .countdown-popup-wrapper {
+    position: fixed;
+    max-width:var(--size);
+    width: 96%;
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
 }
 
+.memory-number-wrapper {
+    --num-size: 100px;
+    margin: 0 0 -50px 0;
+}
+.countdown-number-wrapper {
+    --num-size: 150px;
+    margin: 0 0 -80px 0;
+}
 .memory-number-wrapper, .countdown-number-wrapper {
     background-color: var(--white);
-    --cd-num-size: 150px;
-    --cd-num-size-half: calc(var(--cd-num-size) / 2);
-    width: var(--cd-num-size);
+    width: var(--num-size);
     aspect-ratio: 1 / 1;
     border-radius: 1000em;
     padding: 1em;
     filter: drop-shadow(0 2px 4.54px rgba(0, 0, 0, 0.25));
-    margin: 0 0 -80px 0;
 }
 
 .memory-number-wrapper > img, .countdown-number-wrapper > img {
     width: 100%;   
 }
 
-.memory-content, .countdown-content-wrapper {
+.memory-content-wrapper {
+    padding: 0 0 30px 0;
+    overflow: hidden;
+}
+.countdown-content-wrapper {
+    padding: 100px 10px 50px 10px;
+}
+.memory-content-wrapper, .countdown-content-wrapper {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 100px 10px 30px 10px;
     background-color: var(--white);
     border-radius: 10px;
 }
 
-
-
 /* ? Display memory sections */
 
+.memory-photo {
+    width: 100%;
+    height: 50dvh;
+    background-size: cover;
+    background-position: center;
+}
+
+.memory-text {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px 0;
+     overflow-wrap: break-word;
+    word-break: break-word;    
+    white-space: normal;
+}
 
 /* & Countdown sections */
 

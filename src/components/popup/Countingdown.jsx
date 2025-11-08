@@ -55,7 +55,7 @@ export default function Countingdown({ selectedDate, dateData }) {
     { scope: wrapper }
   );
   return (
-    <div className='countdown-popup-text' ref={wrapper}>
+    <div className='countdown-popup-wrapper' ref={wrapper}>
       <div className='countdown-content-wrapper'>
         <div className='cd-content-1'>This memory can be unlocked in</div>
         {/* countdown timer */}
