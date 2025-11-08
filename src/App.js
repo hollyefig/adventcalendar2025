@@ -27,13 +27,13 @@ function App() {
       tl.to(".black-backdrop", { display: "block" }).to(
         ".black-backdrop",
         { opacity: 0.6, duration: 0.2 },
-        "<.1"
+        "<"
       );
     } else {
       tl.to(".black-backdrop", { opacity: 0, duration: 0.2 }).to(
         ".black-backdrop",
         { display: "none" },
-        "<.1"
+        "<"
       );
     }
 

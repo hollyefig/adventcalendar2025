@@ -43,6 +43,7 @@ export default function Countingdown({ selectedDate, dateData }) {
     return () => clearInterval(interval); // Cleanup
   }, [targetDate]);
 
+  // & USE GSAP for animating in
   useGSAP(
     () => {
       gsap.fromTo(

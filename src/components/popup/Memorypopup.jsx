@@ -5,21 +5,26 @@ import { gsap } from "gsap";
 export default function Memorypopup({ selectedDate, dateData }) {
   const wrapper = useRef(null);
 
-  //   & USE GSAP for animating in
+  // & USE GSAP for animating in
   useGSAP(
     () => {
       gsap.fromTo(
         wrapper.current,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 0.6, delay: 1, ease: "power2.out" }
       );
     },
     { scope: wrapper }
   );
 
   return (
-    <div className='display-popup-text' ref={wrapper}>
-      This date is open, {dateData[selectedDate.index].text}
+    <div className='display-popup-content' ref={wrapper}>
+      <div className='memory-content'>
+        This date is open, {dateData[selectedDate.index].text}
+      </div>
+      <div className='memory-number-wrapper'>
+        <img src={dateData[selectedDate.index].calImg} alt='' />
+      </div>
     </div>
   );
 }
