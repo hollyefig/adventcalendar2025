@@ -1,13 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./nav.css";
 
 export default function Nav({
   toggleNav,
-  isOpen,
+  navIsOpen,
   setNavHeight,
   showPastDates,
   setShowPastDates,
-  dateData,
   setDateData,
 }) {
   const navHiddenRef = useRef(null);
@@ -49,7 +48,7 @@ export default function Nav({
     <div
       className='nav-wrapper'
       style={{
-        bottom: isOpen ? 0 : `-${navHiddenHeight}px`,
+        bottom: navIsOpen ? 0 : `-${navHiddenHeight}px`,
         transition: hasLoaded ? "bottom 0.3s ease" : "none",
         position: "fixed",
         left: 0,

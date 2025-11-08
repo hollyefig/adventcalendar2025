@@ -1,10 +1,88 @@
+.popup-outer-wrapper {
+    width: 100dvw;
+    height: 100dvh;
+    position: absolute;
+    top:0;
+    left:0;
+    background-color: #0000008c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
 .popup-wrapper {
-    --size: 320px;
+    --size: 420px;
     --halfSize: calc(var(--size) / 2);
     position: fixed;
-    top: calc(50dvh - var(--halfSize));
-    left: calc(50% - var(--halfSize));
     background-color: var(--white);
     max-width:var(--size);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.popup-text {
+    width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;    
+    white-space: normal;
+}
+
+/* If date is NOT expired section */
+
+.countdown-popup-text {
+    width: 100%;
+}
+
+.countdown-number-wrapper {
+    background-color: var(--white);
+    --cd-num-size: 150px;
+    --cd-num-size-half: calc(var(--cd-num-size) / 2);
+    width: var(--cd-num-size);
+    aspect-ratio: 1 / 1;
+    border-radius: 1000em;
+    position: absolute;
+    top: calc(var(--cd-num-size-half) * -1.3);
+    left: calc(var(--halfSize) - var(--cd-num-size-half));
+    padding: 1em;
+    filter: drop-shadow(0 4.533px 46.24px rgba(0, 0, 0, 0.45));
+}
+.countdown-number-wrapper > img {
+    width: 100%;   
+}
+
+.countdown-content-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 90px 10px 30px 10px;
+}
+
+/* counterdown timer */
+.cd-content-2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    column-gap: 9px;
+}
+
+.cd-content-2 > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.coundtdown-style {
+    font-weight: 700;
+    color: var(--red);
+    font-size: 3em;
 }

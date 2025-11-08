@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { gsap } from "gsap";
 import "./dates.css";
 import aclogo from "../../IMGs/title-img.png";
@@ -6,7 +6,6 @@ import finalArt from "../../IMGs/final-art.png";
 
 export default function Dates({
   navHeight,
-  setBlackBackdrop,
   showPastDates,
   dateData,
   setDateData,
@@ -36,8 +35,6 @@ export default function Dates({
 
   //   ? Click a day
   const clickDay = (e, index) => {
-    // setBlackBackdrop(true);
-
     // If day can be opened
     if (
       currentDate > dateData[index === 0 ? index : index - 1].expire &&
@@ -48,15 +45,15 @@ export default function Dates({
         prev.map((day, i) => (i === index ? { ...day, open: !day.open } : day))
       );
 
+      popupOpen(index);
+
       gsap.to(`#cal-num-${index}`, {
         rotateY: 90,
         duration: 0.5,
       });
-
-      popupOpen(e, index);
     } else if (currentDate < e.expire && e.open === false) {
       // Day cannot open yet
-      console.log("cannot open yet");
+      popupOpen(index);
     }
   };
 
@@ -89,11 +86,7 @@ export default function Dates({
           <div className='dates-grid'>
             {dateData.map((e, index) => {
               return (
-                <div
-                  id={`cal-${index}`}
-                  key={`cal-${index}`}
-                  onClick={() => clickDay(e, index)}
-                >
+                <div id={`cal-${index}`} key={`cal-${index}`}>
                   {/* Apply expiration conditional & Past Date function */}
                   {showPastDates ? (
                     <div className='calendar-day' id={`cal-num-${index}`}>
@@ -102,6 +95,7 @@ export default function Dates({
                         alt={`cal-alt-${index}`}
                         width='100%'
                         style={{ width: "100%" }}
+                        onClick={() => clickDay(e, index)}
                       />
                     </div>
                   ) : (
@@ -112,6 +106,7 @@ export default function Dates({
                           alt={`cal-alt-${index}`}
                           width='100%'
                           style={{ width: "100%" }}
+                          onClick={() => clickDay(e, index)}
                         />
                       </div>
                     )
