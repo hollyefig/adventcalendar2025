@@ -19,20 +19,6 @@ function App() {
 
   // ! USE EFFECT
   useEffect(() => {
-    // Lock body tag on popup open
-    if (selectedDate.isPopupOpen) {
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.width = "100dvw";
-      document.body.style.height = "100dvh";
-    } else {
-      // reset everything
-      document.body.style.overflow = "";
-      document.body.style.position = "";
-      document.body.style.width = "";
-      document.body.style.height = "";
-    }
-
     // Backdrop animation
     const backdropAnimation = () => {
       const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } });
@@ -52,14 +38,18 @@ function App() {
     };
     backdropAnimation();
 
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => {};
   }, [blackBackdrop, navIsOpen, selectedDate, dateData]);
 
   // Nav toggle
   const toggleNav = () => {
     setNavIsOpen((prev) => !prev);
+    setBlackBackdrop((prev) => !prev);
+  };
+
+  // backdrop function
+  const blackBackdropFunc = () => {
+    navIsOpen && toggleNav();
     setBlackBackdrop((prev) => !prev);
   };
 
@@ -82,16 +72,15 @@ function App() {
         dateData={dateData}
         setDateData={setDateData}
         popupOpen={popupOpen}
-      ></Dates>
-      <div
-        className='black-backdrop'
-        onClick={() => navIsOpen && toggleNav()}
-      ></div>
+        setBlackBackdrop={setBlackBackdrop}
+      />
+      <div className='black-backdrop' onClick={() => blackBackdropFunc()}></div>
       <Popup
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         dateData={dateData}
-      ></Popup>
+        blackBackdropFunc={blackBackdropFunc}
+      />
       <Nav
         toggleNav={toggleNav}
         navIsOpen={navIsOpen}
@@ -99,7 +88,7 @@ function App() {
         showPastDates={showPastDates}
         setShowPastDates={setShowPastDates}
         setDateData={setDateData}
-      ></Nav>
+      />
     </div>
   );
 }
