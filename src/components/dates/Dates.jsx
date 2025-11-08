@@ -10,7 +10,6 @@ export default function Dates({
   dateData,
   setDateData,
   popupOpen,
-  setBlackBackdrop,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -36,7 +35,6 @@ export default function Dates({
 
   //   ? Click a day
   const clickDay = (e, index) => {
-    setBlackBackdrop((prev) => !prev);
     // If day can be opened
     if (
       currentDate > dateData[index === 0 ? index : index - 1].expire &&

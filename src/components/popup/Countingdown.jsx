@@ -40,9 +40,6 @@ export default function Countingdown({ selectedDate, dateData }) {
   }, [targetDate]);
   return (
     <div className='countdown-popup-text'>
-      <div className='countdown-number-wrapper'>
-        <img src={dateData[selectedDate.index].calImg} alt='' />
-      </div>
       <div className='countdown-content-wrapper'>
         <div className='cd-content-1'>This memory can be unlocked in</div>
         {/* countdown timer */}
@@ -79,6 +76,9 @@ export default function Countingdown({ selectedDate, dateData }) {
             <div className='cd-seconds-text'>Seconds</div>
           </div>
         </div>
+      </div>
+      <div className='countdown-number-wrapper'>
+        <img src={dateData[selectedDate.index].calImg} alt='' />
       </div>
     </div>
   );

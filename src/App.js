@@ -7,7 +7,6 @@ import Nav from "./components/nav/Nav";
 import Popup from "./components/popup/Popup";
 
 function App() {
-  const [blackBackdrop, setBlackBackdrop] = useState(false);
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [navHeight, setNavHeight] = useState();
   const [showPastDates, setShowPastDates] = useState(false);
@@ -19,39 +18,27 @@ function App() {
 
   // ! USE EFFECT
   useEffect(() => {
+    const backdropOn = navIsOpen || selectedDate.isPopupOpen;
+
+    const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } });
+
     // Backdrop animation
-    const backdropAnimation = () => {
-      const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } });
-      if (blackBackdrop) {
-        tl.to(".black-backdrop", { display: "block" }).to(
-          ".black-backdrop",
-          { opacity: 0.6, duration: 0.2 },
-          "<.1"
-        );
-      } else {
-        tl.to(".black-backdrop", { opacity: 0, duration: 0.2 }).to(
-          ".black-backdrop",
-          { display: "none" },
-          "<.1"
-        );
-      }
-    };
-    backdropAnimation();
+    if (backdropOn) {
+      tl.to(".black-backdrop", { display: "block" }).to(
+        ".black-backdrop",
+        { opacity: 0.6, duration: 0.2 },
+        "<.1"
+      );
+    } else {
+      tl.to(".black-backdrop", { opacity: 0, duration: 0.2 }).to(
+        ".black-backdrop",
+        { display: "none" },
+        "<.1"
+      );
+    }
 
-    return () => {};
-  }, [blackBackdrop, navIsOpen, selectedDate, dateData]);
-
-  // Nav toggle
-  const toggleNav = () => {
-    setNavIsOpen((prev) => !prev);
-    setBlackBackdrop((prev) => !prev);
-  };
-
-  // backdrop function
-  const blackBackdropFunc = () => {
-    navIsOpen && toggleNav();
-    setBlackBackdrop((prev) => !prev);
-  };
+    return () => tl.kill();
+  }, [navIsOpen, selectedDate]);
 
   // Popup display
   const popupOpen = (i) => {
@@ -60,8 +47,12 @@ function App() {
       index: i,
       isPopupOpen: true,
     }));
+  };
 
-    return i;
+  // backdrop is clicked
+  const backdropClick = () => {
+    setNavIsOpen(false);
+    setSelectedDate((prev) => ({ ...prev, isPopupOpen: false }));
   };
 
   return (
@@ -72,22 +63,20 @@ function App() {
         dateData={dateData}
         setDateData={setDateData}
         popupOpen={popupOpen}
-        setBlackBackdrop={setBlackBackdrop}
       />
-      <div className='black-backdrop' onClick={() => blackBackdropFunc()}></div>
+      <div className='black-backdrop' onClick={backdropClick}></div>
       <Popup
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         dateData={dateData}
-        blackBackdropFunc={blackBackdropFunc}
       />
       <Nav
-        toggleNav={toggleNav}
         navIsOpen={navIsOpen}
         setNavHeight={setNavHeight}
         showPastDates={showPastDates}
         setShowPastDates={setShowPastDates}
         setDateData={setDateData}
+        setNavIsOpen={setNavIsOpen}
       />
     </div>
   );

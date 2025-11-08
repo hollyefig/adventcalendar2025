@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import "./nav.css";
 
 export default function Nav({
-  toggleNav,
+  setNavIsOpen,
   navIsOpen,
   setNavHeight,
   showPastDates,
@@ -57,7 +57,11 @@ export default function Nav({
     >
       <div className='nav-content'>
         {/* Bars */}
-        <div className='nav-bars' ref={navRef} onClick={toggleNav}>
+        <div
+          className='nav-bars'
+          ref={navRef}
+          onClick={() => setNavIsOpen((prev) => !prev)}
+        >
           {[...Array(3)].map((_, i) => (
             <svg
               key={i}

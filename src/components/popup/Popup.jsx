@@ -1,21 +1,10 @@
-import { useEffect } from "react";
 import Countingdown from "./Countingdown";
 import "./popup.css";
 
-export default function Popup({
-  selectedDate,
-  setSelectedDate,
-  dateData,
-  blackBackdropFunc,
-}) {
-  useEffect(() => {
-    return () => {};
-  }, [selectedDate]);
-
+export default function Popup({ selectedDate, setSelectedDate, dateData }) {
   // & Close Popup
   const closePopup = () => {
     setSelectedDate((prev) => ({ ...prev, isPopupOpen: false }));
-    blackBackdropFunc();
   };
 
   return selectedDate.isPopupOpen ? (
@@ -24,7 +13,7 @@ export default function Popup({
         {/* Check if date can open or be on countdown to open */}
         {dateData[selectedDate.index].open ? (
           // Open and showcase memory
-          <div className='popup-text'>
+          <div className='display-popup-text'>
             This date is open, {dateData[selectedDate.index].text}
           </div>
         ) : (
