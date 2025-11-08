@@ -3,6 +3,9 @@ import { gsap } from "gsap";
 import "./dates.css";
 import aclogo from "../../IMGs/title-img.png";
 import finalArt from "../../IMGs/final-art.png";
+import sparkleRed from "../../IMGs/sparkle-red.svg";
+import sparkleYellow from "../../IMGs/sparkle-yellow.svg";
+import sparkleWhite from "../../IMGs/sparkle-white.svg";
 
 export default function Dates({
   navHeight,
@@ -12,6 +15,15 @@ export default function Dates({
   popupOpen,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
+
+  const sparklesArr = [
+    sparkleRed,
+    sparkleYellow,
+    sparkleWhite,
+    sparkleRed,
+    sparkleYellow,
+    sparkleWhite,
+  ];
 
   //   ? USE EFFECT
   useEffect(() => {
@@ -45,12 +57,38 @@ export default function Dates({
         prev.map((day, i) => (i === index ? { ...day, open: !day.open } : day))
       );
 
+      // open the popup with selected data
       popupOpen(index);
 
-      gsap.to(`#cal-num-${index}`, {
+      // Animate opening of date
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      let starMovement = 90;
+
+      tl.to(`#cal-num-${index}`, {
         rotateY: 90,
         duration: 0.5,
-      });
+      })
+        .to(`#cal-${index} .sparkles-wrapper`, { display: "flex" }, "<")
+        .to(
+          `#cal-${index} .sparkle:nth-child(even)`,
+          {
+            x: () => Math.random() * starMovement,
+            y: () => Math.random() * starMovement,
+            opacity: 0,
+            duration: 1.2,
+          },
+          "<"
+        )
+        .to(
+          `#cal-${index} .sparkle:nth-child(odd)`,
+          {
+            x: () => Math.random() * -starMovement,
+            y: () => Math.random() * -starMovement,
+            opacity: 0,
+            duration: 1.2,
+          },
+          "<"
+        );
     } else if (currentDate < e.expire && e.open === false) {
       // Day cannot open yet
       popupOpen(index);
@@ -86,6 +124,7 @@ export default function Dates({
           <div className='dates-grid'>
             {dateData.map((e, index) => {
               return (
+                // overall calendar day container
                 <div id={`cal-${index}`} key={`cal-${index}`}>
                   {/* Apply expiration conditional & Past Date function */}
                   {showPastDates ? (
@@ -111,6 +150,17 @@ export default function Dates({
                       </div>
                     )
                   )}
+                  <div className='sparkles-wrapper'>
+                    {sparklesArr.map((e, i) => (
+                      <img
+                        src={e}
+                        alt=''
+                        id={`sparkle-${i}`}
+                        key={`sparkle-${i}`}
+                        className='sparkle'
+                      />
+                    ))}
+                  </div>
                 </div>
               );
             })}

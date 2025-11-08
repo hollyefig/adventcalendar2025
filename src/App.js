@@ -53,7 +53,7 @@ function App() {
     }
 
     return () => tl.kill();
-  }, [navIsOpen, selectedDate]);
+  }, [navIsOpen, selectedDate, dateData]);
 
   // Popup display
   const popupOpen = (i) => {

@@ -62,3 +62,24 @@
     position: absolute;
     transform-origin: left 50%;
 }
+
+.sparkles-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.sparkles-wrapper > img {
+    --sparkSize: 15px;
+    --halfSize: calc(var(var(--sparkSize)) / 2);
+    width: var(--sparkSize);
+    position: absolute;
+    top: calc(50% - var(--halfSize));
+    left: calc(50% - var(--halfSize));
+}
