@@ -48,10 +48,7 @@ export default function Dates({
   //   ? Click a day
   const clickDay = (e, index) => {
     // If day can be opened
-    if (
-      currentDate > dateData[index === 0 ? index : index - 1].expire &&
-      e.open === false
-    ) {
+    if (currentDate > dateData[index === 0 ? index : index - 1].expire) {
       // set day to opened
       setDateData((prev) =>
         prev.map((day, i) => (i === index ? { ...day, open: !day.open } : day))
@@ -74,7 +71,7 @@ export default function Dates({
           {
             x: () => Math.random() * starMovement,
             y: () => Math.random() * starMovement,
-            opacity: 0,
+            // opacity: 0,
             duration: 1.2,
           },
           "<"
@@ -84,11 +81,12 @@ export default function Dates({
           {
             x: () => Math.random() * -starMovement,
             y: () => Math.random() * -starMovement,
-            opacity: 0,
+            // opacity: 0,
             duration: 1.2,
           },
           "<"
-        );
+        )
+        .to(`#cal-${index} .sparkle`, { opacity: 0 }, "<.5");
     } else if (currentDate < e.expire && e.open === false) {
       // Day cannot open yet
       popupOpen(index);

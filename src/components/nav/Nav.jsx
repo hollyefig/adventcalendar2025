@@ -17,7 +17,6 @@ export default function Nav({
   // & Switch to show past dates
   const switchClick = () => {
     setShowPastDates((prev) => !prev);
-    setDateData((prev) => prev.map((obj) => ({ ...obj, open: false })));
   };
 
   //   ! USE EFFECT
