@@ -20,7 +20,18 @@ function App() {
   // ! USE EFFECT
   useEffect(() => {
     // Lock body tag on popup open
-    document.body.style.overflow = selectedDate.isPopupOpen ? "hidden" : "";
+    if (selectedDate.isPopupOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100dvw";
+      document.body.style.height = "100dvh";
+    } else {
+      // reset everything
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.height = "";
+    }
 
     // Backdrop animation
     const backdropAnimation = () => {
