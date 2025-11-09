@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { gsap } from "gsap";
-import { initialDateData } from "./components/dates/initialDateData";
+import { dateData } from "./components/dates/initialDateData";
 import "./App.css";
 import Dates from "./components/dates/Dates";
 import Nav from "./components/nav/Nav";
@@ -10,7 +10,6 @@ function App() {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [navHeight, setNavHeight] = useState();
   const [showPastDates, setShowPastDates] = useState(false);
-  const [dateData, setDateData] = useState(initialDateData);
   const [selectedDate, setSelectedDate] = useState({
     index: 0,
     isPopupOpen: false,
@@ -53,7 +52,7 @@ function App() {
     }
 
     return () => tl.kill();
-  }, [navIsOpen, selectedDate, dateData]);
+  }, [navIsOpen, selectedDate]);
 
   // Popup display
   const popupOpen = (i) => {
@@ -76,7 +75,6 @@ function App() {
         navHeight={navHeight}
         showPastDates={showPastDates}
         dateData={dateData}
-        setDateData={setDateData}
         popupOpen={popupOpen}
       />
       <div className='black-backdrop' onClick={backdropClick}></div>
@@ -90,7 +88,6 @@ function App() {
         setNavHeight={setNavHeight}
         showPastDates={showPastDates}
         setShowPastDates={setShowPastDates}
-        setDateData={setDateData}
         setNavIsOpen={setNavIsOpen}
       />
     </div>

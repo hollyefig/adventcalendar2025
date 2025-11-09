@@ -11,7 +11,6 @@ export default function Dates({
   navHeight,
   showPastDates,
   dateData,
-  setDateData,
   popupOpen,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -33,27 +32,18 @@ export default function Dates({
       setCurrentDate(now);
     };
 
-    setDateData((prev) =>
-      prev.map((obj) => ({ ...obj, open: new Date() > obj.expire }))
-    );
-
     // check every minute
     const interval = setInterval(dateCheck, 1000 * 60);
 
     return () => {
       clearInterval(interval);
     };
-  }, [setCurrentDate, currentDate, setDateData]);
+  }, [setCurrentDate, currentDate]);
 
   //   ? Click a day
   const clickDay = (e, index) => {
     // If day can be opened
     if (currentDate > dateData[index === 0 ? index : index - 1].expire) {
-      // set day to opened
-      setDateData((prev) =>
-        prev.map((day, i) => (i === index ? { ...day, open: !day.open } : day))
-      );
-
       // open the popup with selected data
       popupOpen(index);
 
@@ -65,29 +55,36 @@ export default function Dates({
         rotateY: 90,
         duration: 0.5,
       })
-        .to(`#cal-${index} .sparkles-wrapper`, { display: "flex" }, "<")
+        .to(
+          `#cal-${index} .sparkles-wrapper`,
+          { display: "flex", opacity: 1 },
+          "<"
+        )
         .to(
           `#cal-${index} .sparkle:nth-child(even)`,
           {
             x: () => Math.random() * starMovement,
             y: () => Math.random() * starMovement,
-            // opacity: 0,
             duration: 1.2,
           },
-          "<"
+          "<.1"
         )
         .to(
           `#cal-${index} .sparkle:nth-child(odd)`,
           {
             x: () => Math.random() * -starMovement,
             y: () => Math.random() * -starMovement,
-            // opacity: 0,
             duration: 1.2,
           },
           "<"
         )
-        .to(`#cal-${index} .sparkle`, { opacity: 0 }, "<.5");
-    } else if (currentDate < e.expire && e.open === false) {
+        .to(
+          `#cal-${index} .sparkles-wrapper`,
+          { opacity: 0, display: "none" },
+          "<.5"
+        )
+        .set(`#cal-${index} .sparkle`, { x: 0, y: 0 });
+    } else if (currentDate < dateData[index].expire) {
       // Day cannot open yet
       popupOpen(index);
     }

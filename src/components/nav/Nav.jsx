@@ -7,7 +7,6 @@ export default function Nav({
   setNavHeight,
   showPastDates,
   setShowPastDates,
-  setDateData,
 }) {
   const navHiddenRef = useRef(null);
   const [hasLoaded, setHasLoaded] = useState(false);
