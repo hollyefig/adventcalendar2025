@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/adventcalendar2025/static/css/main.8d2d88e6.css",
-    "main.js": "/adventcalendar2025/static/js/main.ae38e562.js",
+    "main.css": "/adventcalendar2025/static/css/main.cdd3e80e.css",
+    "main.js": "/adventcalendar2025/static/js/main.0ae084f6.js",
     "static/media/final-art.png": "/adventcalendar2025/static/media/final-art.f0d27ed2499c48cff603.png",
-    "static/media/photo-9.jpg": "/adventcalendar2025/static/media/photo-9.dacdaef1ab45b848e66c.jpg",
     "static/media/photo-5.jpg": "/adventcalendar2025/static/media/photo-5.0b187a8ba16c4f96a1f4.jpg",
+    "static/media/photo-9.jpg": "/adventcalendar2025/static/media/photo-9.5b017866cf30ca2db55a.jpg",
     "static/media/photo-19.jpg": "/adventcalendar2025/static/media/photo-19.db530615ad21a0b901b7.jpg",
     "static/media/photo-18.jpg": "/adventcalendar2025/static/media/photo-18.d448057b4c2418ec1343.jpg",
     "static/media/photo-3.jpg": "/adventcalendar2025/static/media/photo-3.c77e074dd8cfe96b1096.jpg",
@@ -18,11 +18,11 @@
     "static/media/photo-10.jpg": "/adventcalendar2025/static/media/photo-10.22ccc9e8027e66dcf63f.jpg",
     "static/media/photo-21.jpg": "/adventcalendar2025/static/media/photo-21.e1c32c7250310f9fa930.jpg",
     "static/media/photo-14.jpg": "/adventcalendar2025/static/media/photo-14.30a363f9263d95f8f1fc.jpg",
+    "static/media/photo-6.jpg": "/adventcalendar2025/static/media/photo-6.67c86bdca937e5def4c2.jpg",
     "static/media/photo-22.jpg": "/adventcalendar2025/static/media/photo-22.dca2109a61a29dabd4e6.jpg",
     "static/media/photo-17.jpg": "/adventcalendar2025/static/media/photo-17.ff1a76d5c8add6aa58f4.jpg",
     "static/media/photo-7.jpg": "/adventcalendar2025/static/media/photo-7.8444669b5fec9e1cd78a.jpg",
     "static/media/photo-16.jpg": "/adventcalendar2025/static/media/photo-16.8e72bca050a6bf46f033.jpg",
-    "static/media/photo-6.jpg": "/adventcalendar2025/static/media/photo-6.9ec181a6e0d6157bd686.jpg",
     "static/media/photo-13.jpg": "/adventcalendar2025/static/media/photo-13.ee9c4e8ce8e81bd7c085.jpg",
     "static/media/photo-12.jpg": "/adventcalendar2025/static/media/photo-12.c2c5e2d8edc76bc33884.jpg",
     "static/media/photo-8.jpg": "/adventcalendar2025/static/media/photo-8.a78f748e52e60c263781.jpg",
@@ -58,11 +58,11 @@
     "static/media/sparkle-red.svg": "/adventcalendar2025/static/media/sparkle-red.382952131ccef690de2f923c317ccd84.svg",
     "static/media/sparkle-yellow.svg": "/adventcalendar2025/static/media/sparkle-yellow.12aee9a14e0faa60b0d96e10baeac21e.svg",
     "static/media/sparkle-white.svg": "/adventcalendar2025/static/media/sparkle-white.7c4cd8d67323b7d9aae471441b2bab48.svg",
-    "main.8d2d88e6.css.map": "/adventcalendar2025/static/css/main.8d2d88e6.css.map",
-    "main.ae38e562.js.map": "/adventcalendar2025/static/js/main.ae38e562.js.map"
+    "main.cdd3e80e.css.map": "/adventcalendar2025/static/css/main.cdd3e80e.css.map",
+    "main.0ae084f6.js.map": "/adventcalendar2025/static/js/main.0ae084f6.js.map"
   },
   "entrypoints": [
-    "static/css/main.8d2d88e6.css",
-    "static/js/main.ae38e562.js"
+    "static/css/main.cdd3e80e.css",
+    "static/js/main.0ae084f6.js"
   ]
 }
