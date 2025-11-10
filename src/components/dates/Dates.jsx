@@ -55,7 +55,7 @@ export default function Dates({
     })
       .to(
         `#cal-${index} .sparkles-wrapper`,
-        { display: "flex", opacity: 1 },
+        { display: "flex", opacity: 1, zIndex: 100 },
         "<"
       )
       .to(
@@ -81,6 +81,7 @@ export default function Dates({
         { opacity: 0, display: "none" },
         "<.5"
       )
+      .to(`#cal-${index} .sparkles-wrapper`, { zIndex: "initial" }, "<.5")
       .set(`#cal-${index} .sparkle`, { x: 0, y: 0 });
   });
 
