@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import "./dates.css";
 import aclogo from "../../IMGs/title-img.png";
 import finalArt from "../../IMGs/final-art.png";
@@ -14,6 +15,8 @@ export default function Dates({
   popupOpen,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const wrapper = useRef(null);
+  const { contextSafe } = useGSAP({ scope: wrapper });
 
   const sparklesArr = [
     sparkleRed,
@@ -40,50 +43,54 @@ export default function Dates({
     };
   }, [setCurrentDate, currentDate]);
 
+  // & USE GSAP
+  const safeGSAP = contextSafe((index) => {
+    // Animate opening of date
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    let starMovement = 90;
+
+    tl.to(`#cal-num-${index}`, {
+      rotateY: 90,
+      duration: 0.5,
+    })
+      .to(
+        `#cal-${index} .sparkles-wrapper`,
+        { display: "flex", opacity: 1 },
+        "<"
+      )
+      .to(
+        `#cal-${index} .sparkle:nth-child(even)`,
+        {
+          x: () => Math.random() * starMovement,
+          y: () => Math.random() * starMovement,
+          duration: 1.2,
+        },
+        "<.1"
+      )
+      .to(
+        `#cal-${index} .sparkle:nth-child(odd)`,
+        {
+          x: () => Math.random() * -starMovement,
+          y: () => Math.random() * -starMovement,
+          duration: 1.2,
+        },
+        "<"
+      )
+      .to(
+        `#cal-${index} .sparkles-wrapper`,
+        { opacity: 0, display: "none" },
+        "<.5"
+      )
+      .set(`#cal-${index} .sparkle`, { x: 0, y: 0 });
+  });
+
   //   ? Click a day
-  const clickDay = (e, index) => {
+  const clickDay = (index) => {
     // If day can be opened
     if (currentDate > dateData[index === 0 ? index : index - 1].expire) {
       // open the popup with selected data
       popupOpen(index);
-
-      // Animate opening of date
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      let starMovement = 90;
-
-      tl.to(`#cal-num-${index}`, {
-        rotateY: 90,
-        duration: 0.5,
-      })
-        .to(
-          `#cal-${index} .sparkles-wrapper`,
-          { display: "flex", opacity: 1 },
-          "<"
-        )
-        .to(
-          `#cal-${index} .sparkle:nth-child(even)`,
-          {
-            x: () => Math.random() * starMovement,
-            y: () => Math.random() * starMovement,
-            duration: 1.2,
-          },
-          "<.1"
-        )
-        .to(
-          `#cal-${index} .sparkle:nth-child(odd)`,
-          {
-            x: () => Math.random() * -starMovement,
-            y: () => Math.random() * -starMovement,
-            duration: 1.2,
-          },
-          "<"
-        )
-        .to(
-          `#cal-${index} .sparkles-wrapper`,
-          { opacity: 0, display: "none" },
-          "<.5"
-        )
-        .set(`#cal-${index} .sparkle`, { x: 0, y: 0 });
+      safeGSAP(index);
     } else if (currentDate < dateData[index].expire) {
       // Day cannot open yet
       popupOpen(index);
@@ -95,6 +102,7 @@ export default function Dates({
     <div
       className='dates-wrapper'
       style={{ padding: `2em 0 ${navHeight}px 0` }}
+      ref={wrapper}
     >
       <div className='dates-top'>
         <img
@@ -129,7 +137,7 @@ export default function Dates({
                         alt={`cal-alt-${index}`}
                         width='100%'
                         style={{ width: "100%" }}
-                        onClick={() => clickDay(e, index)}
+                        onClick={() => clickDay(index)}
                       />
                     </div>
                   ) : (
@@ -140,7 +148,7 @@ export default function Dates({
                           alt={`cal-alt-${index}`}
                           width='100%'
                           style={{ width: "100%" }}
-                          onClick={() => clickDay(e, index)}
+                          onClick={() => clickDay(index)}
                         />
                       </div>
                     )

@@ -7,7 +7,9 @@ export default function Countingdown({ selectedDate, dateData }) {
 
   // get target date
   const targetDate =
-    dateData[selectedDate.index !== 0 ? selectedDate.index - 1 : 0].expire;
+    dateData[
+      selectedDate.index === 0 ? selectedDate.index : selectedDate.index - 1
+    ].expire;
   const [timeLeft, setTimeLeft] = useState({});
 
   // ? USE EFFECT

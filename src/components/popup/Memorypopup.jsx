@@ -26,9 +26,7 @@ export default function Memorypopup({ selectedDate, dateData }) {
             backgroundImage: `url(${dateData[selectedDate.index].photo})`,
           }}
         ></div>
-        <div className='memory-text'>
-          This date is open, {dateData[selectedDate.index].text}
-        </div>
+        <div className='memory-text'>{dateData[selectedDate.index].text}</div>
       </div>
       <div className='memory-number-wrapper'>
         <img src={dateData[selectedDate.index].calImg} alt='' />

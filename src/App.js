@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
-import { gsap } from "gsap";
-import { dateData } from "./components/dates/initialDateData";
 import "./App.css";
+import { useState } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import Dates from "./components/dates/Dates";
 import Nav from "./components/nav/Nav";
 import Popup from "./components/popup/Popup";
+import { dateData } from "./components/dates/initialDateData";
 
 function App() {
   const [navIsOpen, setNavIsOpen] = useState(false);
@@ -15,12 +16,14 @@ function App() {
     isPopupOpen: false,
   });
 
-  // ! USE EFFECT
-  useEffect(() => {
+  // & USE GSAP
+  useGSAP(() => {
     // determine if date opened is in future or not for backdrop animation delay
     const notFutureDate =
       new Date() >
-      dateData[selectedDate.index !== 0 ? selectedDate.index - 1 : 0].expire;
+      dateData[
+        selectedDate.index === 0 ? selectedDate.index : selectedDate.index - 1
+      ].expire;
 
     // backdrop boolean
     const backdropOn = navIsOpen || selectedDate.isPopupOpen;
@@ -51,7 +54,7 @@ function App() {
       );
     }
 
-    return () => tl.kill();
+    // return () => tl.kill();
   }, [navIsOpen, selectedDate]);
 
   // Popup display

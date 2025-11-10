@@ -12,7 +12,9 @@ export default function Popup({ selectedDate, setSelectedDate, dateData }) {
     <div className='popup-outer-wrapper' onClick={closePopup}>
       {/* Check if date can open or be on countdown to open */}
       {new Date() >
-      dateData[selectedDate.index !== 0 ? selectedDate.index - 1 : 0].expire ? (
+      dateData[
+        selectedDate.index === 0 ? selectedDate.index : selectedDate.index - 1
+      ].expire ? (
         // Open and showcase memory
         <Memorypopup selectedDate={selectedDate} dateData={dateData} />
       ) : (

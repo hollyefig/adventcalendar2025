@@ -29,7 +29,7 @@
 }
 
 .memory-number-wrapper {
-    --num-size: 100px;
+    --num-size: 90px;
     margin: 0 0 -50px 0;
 }
 .countdown-number-wrapper {
@@ -80,10 +80,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 10px 0;
+    padding: 1em 1em 0;
      overflow-wrap: break-word;
     word-break: break-word;    
     white-space: normal;
+    font-size: .9rem
 }
 
 /* & Countdown sections */
