@@ -3,7 +3,6 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import "./dates.css";
 import aclogo from "../../IMGs/title-img.png";
-import finalArt from "../../IMGs/final-art.png";
 import sparkleRed from "../../IMGs/sparkle-red.svg";
 import sparkleYellow from "../../IMGs/sparkle-yellow.svg";
 import sparkleWhite from "../../IMGs/sparkle-white.svg";
@@ -117,32 +116,14 @@ export default function Dates({
       <div className='dates-bottom'>
         <div className='dates-grid-wrapper'>
           <div className='final-art-wrapper'>
-            <img
-              src={finalArt}
-              width='100%'
-              style={{ width: "100%", height: "auto" }}
-              alt='final-art'
-            />
-          </div>
-          {/* Dates grid */}
-          <div className='dates-grid'>
-            {dateData.map((e, index) => {
-              return (
-                // overall calendar day container
-                <div id={`cal-${index}`} key={`cal-${index}`}>
-                  {/* Apply expiration conditional & Past Date function */}
-                  {showPastDates ? (
-                    <div className='calendar-day' id={`cal-num-${index}`}>
-                      <img
-                        src={e.calImg}
-                        alt={`cal-alt-${index}`}
-                        width='100%'
-                        style={{ width: "100%" }}
-                        onClick={() => clickDay(index)}
-                      />
-                    </div>
-                  ) : (
-                    currentDate < e.expire && (
+            {/* Dates grid */}
+            <div className='dates-grid'>
+              {dateData.map((e, index) => {
+                return (
+                  // overall calendar day container
+                  <div id={`cal-${index}`} key={`cal-${index}`}>
+                    {/* Apply expiration conditional & Past Date function */}
+                    {showPastDates ? (
                       <div className='calendar-day' id={`cal-num-${index}`}>
                         <img
                           src={e.calImg}
@@ -152,22 +133,34 @@ export default function Dates({
                           onClick={() => clickDay(index)}
                         />
                       </div>
-                    )
-                  )}
-                  <div className='sparkles-wrapper'>
-                    {sparklesArr.map((e, i) => (
-                      <img
-                        src={e}
-                        alt=''
-                        id={`sparkle-${i}`}
-                        key={`sparkle-${i}`}
-                        className='sparkle'
-                      />
-                    ))}
+                    ) : (
+                      currentDate < e.expire && (
+                        <div className='calendar-day' id={`cal-num-${index}`}>
+                          <img
+                            src={e.calImg}
+                            alt={`cal-alt-${index}`}
+                            width='100%'
+                            style={{ width: "100%" }}
+                            onClick={() => clickDay(index)}
+                          />
+                        </div>
+                      )
+                    )}
+                    <div className='sparkles-wrapper'>
+                      {sparklesArr.map((e, i) => (
+                        <img
+                          src={e}
+                          alt=''
+                          id={`sparkle-${i}`}
+                          key={`sparkle-${i}`}
+                          className='sparkle'
+                        />
+                      ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
