@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/adventcalendar2025/static/css/main.2bba7acf.css",
-    "main.js": "/adventcalendar2025/static/js/main.1a2be232.js",
+    "main.js": "/adventcalendar2025/static/js/main.d3d47662.js",
     "static/media/final-art.png": "/adventcalendar2025/static/media/final-art.f0d27ed2499c48cff603.png",
     "static/media/photo-12.jpg": "/adventcalendar2025/static/media/photo-12.46af971e5e7cd86c9d68.jpg",
     "static/media/photo-21.jpg": "/adventcalendar2025/static/media/photo-21.5f1fbe801b5422eea5e5.jpg",
@@ -59,10 +59,10 @@
     "static/media/sparkle-yellow.svg": "/adventcalendar2025/static/media/sparkle-yellow.12aee9a14e0faa60b0d96e10baeac21e.svg",
     "static/media/sparkle-white.svg": "/adventcalendar2025/static/media/sparkle-white.7c4cd8d67323b7d9aae471441b2bab48.svg",
     "main.2bba7acf.css.map": "/adventcalendar2025/static/css/main.2bba7acf.css.map",
-    "main.1a2be232.js.map": "/adventcalendar2025/static/js/main.1a2be232.js.map"
+    "main.d3d47662.js.map": "/adventcalendar2025/static/js/main.d3d47662.js.map"
   },
   "entrypoints": [
     "static/css/main.2bba7acf.css",
-    "static/js/main.1a2be232.js"
+    "static/js/main.d3d47662.js"
   ]
 }
