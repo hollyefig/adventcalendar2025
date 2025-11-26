@@ -2,14 +2,16 @@ import { useEffect, useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
+const startDate = new Date("December 1, 2025 00:00:00");
+
 export default function Countingdown({ selectedDate, dateData }) {
   const wrapper = useRef(null);
 
   // get target date
   const targetDate =
-    dateData[
-      selectedDate.index === 0 ? selectedDate.index : selectedDate.index - 1
-    ].expire;
+    selectedDate.index === 0
+      ? startDate
+      : dateData[selectedDate.index - 1].expire;
   const [timeLeft, setTimeLeft] = useState({});
 
   // ? USE EFFECT
@@ -56,6 +58,9 @@ export default function Countingdown({ selectedDate, dateData }) {
     },
     { scope: wrapper }
   );
+
+  console.log(targetDate);
+
   return (
     <div className='countdown-popup-wrapper' ref={wrapper}>
       <div className='countdown-content-wrapper'>
