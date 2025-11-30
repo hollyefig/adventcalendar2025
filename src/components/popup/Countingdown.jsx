@@ -59,8 +59,6 @@ export default function Countingdown({ selectedDate, dateData }) {
     { scope: wrapper }
   );
 
-  console.log(targetDate);
-
   return (
     <div className='countdown-popup-wrapper' ref={wrapper}>
       <div className='countdown-content-wrapper'>
