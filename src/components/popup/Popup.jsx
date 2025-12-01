@@ -14,10 +14,7 @@ export default function Popup({ selectedDate, setSelectedDate, dateData }) {
     <div className='popup-outer-wrapper' onClick={closePopup}>
       {selectedDate.index === 0 ? (
         <Memorypopup selectedDate={selectedDate} dateData={dateData} />
-      ) : new Date() >
-        dateData[
-          selectedDate.index === 0 ? selectedDate.index : selectedDate.index - 1
-        ].expire ? (
+      ) : new Date() > dateData[selectedDate.index - 1].expire ? (
         <Memorypopup selectedDate={selectedDate} dateData={dateData} />
       ) : (
         <Countingdown selectedDate={selectedDate} dateData={dateData} />
