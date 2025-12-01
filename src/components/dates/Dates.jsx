@@ -86,8 +86,12 @@ export default function Dates({
 
   //   ? Click a day
   const clickDay = (index) => {
+    console.log(index);
     // If day can be opened
-    if (currentDate > dateData[index === 0 ? index : index - 1].expire) {
+    if (
+      currentDate > dateData[index === 0 ? index : index - 1].expire ||
+      index === 0
+    ) {
       // open the popup with selected data
       popupOpen(index);
       safeGSAP(index);
