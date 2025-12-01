@@ -8,8 +8,6 @@ export default function Popup({ selectedDate, setSelectedDate, dateData }) {
     setSelectedDate((prev) => ({ ...prev, isPopupOpen: false }));
   };
 
-  console.log();
-
   return selectedDate.isPopupOpen ? (
     <div className='popup-outer-wrapper' onClick={closePopup}>
       {selectedDate.index === 0 ? (
